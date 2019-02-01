@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SuperHeroCreator.Models;
 
 namespace SuperHeroCreator.Controllers
 {
     public class SuperheroController : Controller
     {
+        ApplicationDbContext SuperHerosDB = new ApplicationDbContext();
         // GET: Superhero
         public ActionResult Index()
         {
-            return View();
+            var superhero = SuperHerosDB.SuperHeros.ToList();
+
+            {
+                return View(superhero);
+            }
+            
         }
 
         // GET: Superhero/Details/5
