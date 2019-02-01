@@ -31,16 +31,18 @@ namespace SuperHeroCreator.Controllers
         // GET: Superhero/Create
         public ActionResult Create()
         {
+          
             return View();
         }
 
         // POST: Superhero/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(SuperHeros superheros)
         {
             try
             {
-                // TODO: Add insert logic here
+                SuperHerosDB.SuperHeros.Add(superheros);
+                SuperHerosDB.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -58,11 +60,11 @@ namespace SuperHeroCreator.Controllers
 
         // POST: Superhero/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, SuperHeros superheros)
         {
             try
             {
-                // TODO: Add update logic here
+                
 
                 return RedirectToAction("Index");
             }
