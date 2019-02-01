@@ -1,0 +1,58 @@
+﻿@model SuperHeroCreator.Models.SuperHeros
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SuperHeros</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SuperheroName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuperheroName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HerosAlterEgo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HerosAlterEgo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryAbility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryAbility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondaryAbility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondaryAbility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatchPhrase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatchPhrase)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SuperheroId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
