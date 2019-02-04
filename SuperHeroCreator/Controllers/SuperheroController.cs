@@ -10,6 +10,7 @@ namespace SuperHeroCreator.Controllers
     public class SuperheroController : Controller
     {
         ApplicationDbContext SuperHerosDB = new ApplicationDbContext();
+
         // GET: Superhero
         public ActionResult Index()
         {
@@ -18,7 +19,7 @@ namespace SuperHeroCreator.Controllers
             {
                 return View(superhero);
             }
-            
+
         }
 
         // GET: Superhero/Details/5
@@ -31,13 +32,14 @@ namespace SuperHeroCreator.Controllers
         // GET: Superhero/Create
         public ActionResult Create()
         {
-          
+
             return View();
         }
 
         // POST: Superhero/Create
         [HttpPost]
-        public ActionResult Create(SuperHeros superheros)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include ="SuperheroNamae, HerosAlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] SuperHeros superheros)
         {
             try
             {
@@ -54,18 +56,19 @@ namespace SuperHeroCreator.Controllers
 
         // GET: Superhero/Edit/5
         public ActionResult Edit(int id)
-        {
+        { 
            
             return View();
         }
 
         // POST: Superhero/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, SuperHeros superheros)
         {
             try
             {
-                var hero = SuperHerosDB.SuperHeros.Find(id);
+                var hero = SuperHerosDB.SuperHeros.SingleOrDefault(h => h.SuperheroId == id);
                 hero.SuperheroName = superheros.SuperheroName;
                 hero.HerosAlterEgo = superheros.HerosAlterEgo;
                 hero.PrimaryAbility = superheros.PrimaryAbility;
@@ -73,7 +76,7 @@ namespace SuperHeroCreator.Controllers
                 hero.CatchPhrase = superheros.CatchPhrase;
                 SuperHerosDB.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("hero");
             }
             catch
             {
@@ -90,6 +93,7 @@ namespace SuperHeroCreator.Controllers
 
         // POST: Superhero/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, SuperHeros superheros)
         {
             try
