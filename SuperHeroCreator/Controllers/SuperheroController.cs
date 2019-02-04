@@ -56,9 +56,9 @@ namespace SuperHeroCreator.Controllers
 
         // GET: Superhero/Edit/5
         public ActionResult Edit(int id)
-        { 
-           
-            return View();
+        {
+            var hero = SuperHerosDB.SuperHeros.SingleOrDefault(h => h.SuperheroId == id);
+            return View(hero);
         }
 
         // POST: Superhero/Edit/5
@@ -76,7 +76,7 @@ namespace SuperHeroCreator.Controllers
                 hero.CatchPhrase = superheros.CatchPhrase;
                 SuperHerosDB.SaveChanges();
 
-                return RedirectToAction("hero");
+                return RedirectToAction("Index");
             }
             catch
             {
