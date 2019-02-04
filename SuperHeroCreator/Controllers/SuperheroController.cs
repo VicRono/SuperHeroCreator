@@ -55,6 +55,7 @@ namespace SuperHeroCreator.Controllers
         // GET: Superhero/Edit/5
         public ActionResult Edit(int id)
         {
+           
             return View();
         }
 
@@ -64,7 +65,13 @@ namespace SuperHeroCreator.Controllers
         {
             try
             {
-                
+                var hero = SuperHerosDB.SuperHeros.Find(id);
+                hero.SuperheroName = superheros.SuperheroName;
+                hero.HerosAlterEgo = superheros.HerosAlterEgo;
+                hero.PrimaryAbility = superheros.PrimaryAbility;
+                hero.SecondaryAbility = superheros.SecondaryAbility;
+                hero.CatchPhrase = superheros.CatchPhrase;
+                SuperHerosDB.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -73,20 +80,23 @@ namespace SuperHeroCreator.Controllers
                 return View();
             }
         }
-
+        
         // GET: Superhero/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var hero = SuperHerosDB.SuperHeros.Find(id);
+            return View(hero);
         }
 
         // POST: Superhero/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, SuperHeros superheros)
         {
             try
             {
-                // TODO: Add delete logic here
+                superheros = SuperHerosDB.SuperHeros.Find(id);
+                SuperHerosDB.SuperHeros.Remove(superheros);
+                SuperHerosDB.SaveChanges();
 
                 return RedirectToAction("Index");
             }
