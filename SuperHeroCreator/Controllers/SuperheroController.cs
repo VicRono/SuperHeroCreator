@@ -39,7 +39,7 @@ namespace SuperHeroCreator.Controllers
         // POST: Superhero/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="SuperheroNamae, HerosAlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] SuperHeros superheros)
+        public ActionResult Create([Bind(Include ="SuperheroName, HerosAlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] SuperHeros superheros)
         {
             try
             {
@@ -87,20 +87,21 @@ namespace SuperHeroCreator.Controllers
         // GET: Superhero/Delete/5
         public ActionResult Delete(int id)
         {
-            var hero = SuperHerosDB.SuperHeros.Find(id);
+            var hero = SuperHerosDB.SuperHeros.SingleOrDefault(h => h.SuperheroId == id);
             return View(hero);
         }
 
-        // POST: Superhero/Delete/5
+        //POST: Superhero/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, SuperHeros superheros)
         {
             try
             {
-                superheros = SuperHerosDB.SuperHeros.Find(id);
-                SuperHerosDB.SuperHeros.Remove(superheros);
+                var hero = SuperHerosDB.SuperHeros.SingleOrDefault(h => h.SuperheroId == id);
+                SuperHerosDB.SuperHeros.Remove(hero);
                 SuperHerosDB.SaveChanges();
+                var heros = SuperHerosDB.SuperHeros.ToList();
 
                 return RedirectToAction("Index");
             }

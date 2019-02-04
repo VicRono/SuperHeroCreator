@@ -1,0 +1,64 @@
+﻿@model SuperHeroCreator.Models.SuperHeros
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SuperHeros</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SuperheroName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuperheroName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HerosAlterEgo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HerosAlterEgo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaryAbility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryAbility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondaryAbility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondaryAbility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CatchPhrase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CatchPhrase)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="SuperheroController" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
